@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" data-mode="light" className={inter.variable}>
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gray-50`}>
         <main className="relative">{props.children}</main>
       </body>
     </html>

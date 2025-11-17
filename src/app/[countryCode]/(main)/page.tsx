@@ -31,10 +31,15 @@ export default async function Home(props: {
   return (
     <>
       <Hero />
-      <div className="py-12">
-        <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
+      <div className="pt-20 pb-12">
+        <div className="content-container bg-white rounded-lg shadow-sm p-8">
+          <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
+          <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          {/* <ul className="flex flex-col gap-x-6">
+            <FeaturedProducts collections={collections} region={region} />
+          </ul> */}
+        </div>
       </div>
     </>
   )

@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { ChevronLeft, ChevronRight } from "@medusajs/icons"
+import VehicleSearchForm from "@modules/home/components/vehicle-search-form"
 
 type SlideContent = {
   title: string
@@ -154,7 +155,7 @@ const Hero = () => {
 
   return (
     <div
-      className="relative h-[75vh] w-full overflow-hidden bg-gray-900"
+      className="relative h-[75vh] w-full overflow-visible bg-gray-900"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -290,7 +291,7 @@ const Hero = () => {
       </button>
 
       {/* Dots Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-30 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -303,6 +304,13 @@ const Hero = () => {
             aria-label={`Aller au slide ${index + 1}`}
           />
         ))}
+      </div>
+
+      {/* Search Form Overlay */}
+      <div className="absolute -bottom-80 left-0 right-0 z-40 flex justify-center">
+        <div className="w-full max-w-5xl px-6">
+          <VehicleSearchForm />
+        </div>
       </div>
     </div>
   )

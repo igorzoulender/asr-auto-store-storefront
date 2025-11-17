@@ -179,4 +179,45 @@
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
   }
+
+  /* React Select Styles */
+  .react-select-container {
+    @apply w-full;
+  }
+
+  .react-select__control {
+    @apply border-gray-300 rounded-lg;
+  }
+
+  .react-select__control--is-focused {
+    @apply border-red-600 ring-2 ring-red-500;
+  }
+
+  .react-select__menu {
+    @apply rounded-lg shadow-lg border border-gray-200;
+  }
+
+  .react-select__option {
+    @apply cursor-pointer;
+  }
+
+  .react-select__option--is-selected {
+    @apply bg-red-600 text-white;
+  }
+
+  .react-select__option--is-focused {
+    @apply bg-red-50;
+  }
+
+  .react-select__multi-value {
+    @apply bg-red-100 rounded;
+  }
+
+  .react-select__multi-value__label {
+    @apply text-red-800;
+  }
+
+  .react-select__multi-value__remove {
+    @apply hover:bg-red-200 text-red-800;
+  }
 }
