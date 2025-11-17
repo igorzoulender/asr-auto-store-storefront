@@ -4,13 +4,13 @@ import Image from "next/image"
 
 const brands = [
   { name: "Audi", logo: "/images/icons/brands/audi.svg" },
-  { name: "BMW", logo: "/images/icons/brands/bmw.svg" },
-  { name: "Mercedes-Benz", logo: "/images/icons/brands/mercedes.svg" },
   { name: "Toyota", logo: "/images/icons/brands/toyota.svg" },
+  { name: "Mercedes-Benz", logo: "/images/icons/brands/mercedes.svg" },
+  { name: "BMW", logo: "/images/icons/brands/bmw.svg" },
+  { name: "Hyundai", logo: "/images/icons/brands/hyundai.svg" },
+  { name: "Land over", logo: "/images/icons/brands/land_over.svg" },
+  { name: "KIA", logo: "/images/icons/brands/kia.svg" },
   { name: "MG", logo: "/images/icons/brands/mg.svg" },
-  { name: "Lexus", initials: "LX" },
-  { name: "Range Rover", initials: "RR" },
-  { name: "Tesla", initials: "TS" },
 ]
 
 const PopularBrands = () => {

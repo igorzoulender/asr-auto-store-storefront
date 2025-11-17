@@ -2,7 +2,12 @@
 
 import { useState, FormEvent } from "react"
 import { useRouter } from "next/navigation"
-import Select, { StylesConfig, ControlProps, OptionProps } from "react-select"
+import Select, {
+  StylesConfig,
+  ControlProps,
+  OptionProps,
+  CSSObjectWithLabel,
+} from "react-select"
 import { Button } from "@medusajs/ui"
 import Search from "@modules/common/icons/search"
 import Image from "next/image"
@@ -92,8 +97,8 @@ const getModelsByBrand = (brandId: string): MultiOptionType[] => {
 }
 
 // Styles personnalisés pour react-select
-const customStyles: StylesConfig<any, false> = {
-  control: (provided: any, state: any) => ({
+const createSelectStyles = <T, IsMulti extends boolean>(): StylesConfig<T, IsMulti> => ({
+  control: (provided: CSSObjectWithLabel, state: ControlProps<T, IsMulti>) => ({
     ...provided,
     minHeight: "48px",
     borderColor: state.isFocused ? "#dc2626" : "#d1d5db",
@@ -102,7 +107,7 @@ const customStyles: StylesConfig<any, false> = {
       borderColor: "#dc2626",
     },
   }),
-  option: (provided: any, state: any) => ({
+  option: (provided: CSSObjectWithLabel, state: OptionProps<T, IsMulti>) => ({
     ...provided,
     backgroundColor: state.isSelected
       ? "#dc2626"
@@ -115,7 +120,10 @@ const customStyles: StylesConfig<any, false> = {
       color: "white",
     },
   }),
-}
+})
+
+const singleSelectStyles = createSelectStyles<OptionType, false>()
+const multiSelectStyles = createSelectStyles<MultiOptionType, true>()
 
 const VehicleSearchForm = () => {
   const router = useRouter()
@@ -206,7 +214,7 @@ const VehicleSearchForm = () => {
               setSelectedModels([]) // Réinitialiser les modèles quand la marque change
             }}
             formatOptionLabel={formatOptionLabel}
-            styles={customStyles}
+            styles={singleSelectStyles}
             isSearchable
             placeholder="Toutes les marques"
             className="react-select-container"
@@ -219,12 +227,11 @@ const VehicleSearchForm = () => {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Modèle
           </label>
-          {/* @ts-expect-error - Type mismatch between single and multi select styles */}
           <Select<MultiOptionType, true>
             options={availableModels}
             value={selectedModels}
             onChange={(newValue: readonly MultiOptionType[]) => setSelectedModels([...newValue])}
-            styles={customStyles}
+            styles={multiSelectStyles}
             isSearchable
             isMulti
             placeholder="Tous les modèles"
@@ -243,7 +250,7 @@ const VehicleSearchForm = () => {
             options={years}
             value={selectedYear}
             onChange={(newValue: OptionType | null) => setSelectedYear(newValue)}
-            styles={customStyles}
+            styles={singleSelectStyles}
             isSearchable
             placeholder="Toutes les années"
             className="react-select-container"
@@ -263,7 +270,7 @@ const VehicleSearchForm = () => {
             options={vehicleTypes}
             value={selectedVehicleType}
             onChange={(newValue: OptionType | null) => setSelectedVehicleType(newValue)}
-            styles={customStyles}
+            styles={singleSelectStyles}
             isSearchable
             placeholder="Tous les types"
             className="react-select-container"
@@ -280,7 +287,7 @@ const VehicleSearchForm = () => {
             options={fuelTypes}
             value={selectedFuel}
             onChange={(newValue: OptionType | null) => setSelectedFuel(newValue)}
-            styles={customStyles}
+            styles={singleSelectStyles}
             isSearchable
             placeholder="Tous les carburants"
             className="react-select-container"
@@ -297,7 +304,7 @@ const VehicleSearchForm = () => {
             options={transmissionTypes}
             value={selectedTransmission}
             onChange={(newValue: OptionType | null) => setSelectedTransmission(newValue)}
-            styles={customStyles}
+            styles={singleSelectStyles}
             isSearchable
             placeholder="Toutes les transmissions"
             className="react-select-container"
@@ -310,10 +317,10 @@ const VehicleSearchForm = () => {
       <div className="flex lg:justify-end md:justify-end sm:justify-center justify-center">
         <Button
           type="submit"
-          className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-base font-semibold transition-all duration-300 flex items-center gap-2 border border-red-600"
+          className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-base font-semibold transition-all duration-300 flex items-center gap-2 border-2 border-red-500 shadow-[0_4px_0_rgba(0,0,0,0.08)]"
         >
           <Search size={20} color="white" />
-          <span>RECHERCHER</span>
+          <span className="uppercase">Rechercher</span>
         </Button>
       </div>
     </form>
