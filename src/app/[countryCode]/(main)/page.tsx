@@ -6,6 +6,7 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import HowItWorks from "@modules/home/components/how-It-works"
 import PopularBrands from "@modules/home/components/popular-brands"
+import TrendingVehicles from "@modules/home/components/trending-vehicles"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
@@ -39,6 +40,8 @@ export default async function Home(props: {
 
         {/* Popular Brands */}
         <PopularBrands />
+
+        <TrendingVehicles />
 
         {/* <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />

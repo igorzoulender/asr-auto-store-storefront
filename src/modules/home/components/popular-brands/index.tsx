@@ -43,17 +43,15 @@ const PopularBrands = () => {
                 key={brand.name}
                 className="relative border-white/10 border-b sm:border-b border-r sm:border-r last:border-r-0 sm:[&:nth-child(4n)]:border-r-0 [&:nth-last-child(-n+2)]:border-b-0 sm:[&:nth-last-child(-n+4)]:border-b-0 flex flex-col items-center justify-center py-10 px-6 gap-4"
               >
-                {brand.logo ? (
                   <Image
                     src={brand.logo}
                     alt={brand.name}
                     width={140}
                     height={60}
                     className="h-12 md:h-16 w-auto object-contain opacity-80"
+                    id="react-select-2-live-region"
                   />
-                ) : (
-                  <span className="text-3xl font-bold tracking-[0.3em] text-white/70">{brand.initials}</span>
-                )}
+
                 <p className="text-base font-medium text-white/80 uppercase tracking-wide">{brand.name}</p>
               </div>
             ))}
