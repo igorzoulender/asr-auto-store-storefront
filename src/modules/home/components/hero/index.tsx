@@ -307,8 +307,8 @@ const Hero = () => {
       </div>
 
       {/* Search Form Overlay */}
-      <div className="absolute -bottom-80 left-0 right-0 z-40 flex justify-center">
-        <div className="w-full max-w-5xl px-6">
+      <div className="absolute lg:-bottom-80 md:-bottom-[340px] sm:-bottom-[700px] -bottom-[730px] left-0 right-0 z-40 flex justify-center">
+        <div className="w-full max-w-[88rem] px-6">
           <VehicleSearchForm />
         </div>
       </div>

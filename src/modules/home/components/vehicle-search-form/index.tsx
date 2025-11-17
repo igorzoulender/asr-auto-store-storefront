@@ -182,12 +182,12 @@ const VehicleSearchForm = () => {
   )
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200">
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-xl p-8 border border-gray-200">
       {/* Title with icon */}
       <div className="flex items-center gap-3 mb-6">
         <Search size={28} color="#dc2626" />
         <h2 className="text-2xl font-bold text-gray-900">
-          Trouvez La Voiture Qui Vous Correspond
+          Trouvez la voiture qui vous correspond
         </h2>
       </div>
 
@@ -307,10 +307,10 @@ const VehicleSearchForm = () => {
       </div>
 
       {/* Bouton de recherche aligné à droite */}
-      <div className="flex justify-end">
+      <div className="flex lg:justify-end md:justify-end sm:justify-center justify-center">
         <Button
           type="submit"
-          className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-base font-semibold transition-all duration-300 flex items-center gap-2"
+          className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-base font-semibold transition-all duration-300 flex items-center gap-2 border border-red-600"
         >
           <Search size={20} color="white" />
           <span>RECHERCHER</span>

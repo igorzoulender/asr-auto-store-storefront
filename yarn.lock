@@ -7675,6 +7675,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.554.0":
+  version: 0.554.0
+  resolution: "lucide-react@npm:0.554.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/3f21ca482ca0b73ae30da06675c2f064c27f0ba165e55a064318443a6d92c6affc8b6ffefc94a8d082d27aaaf34f45df281ca21087d58c2361f7cfae16daba08
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:^3.0.2, make-dir@npm:^3.1.0":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
@@ -7735,6 +7744,7 @@ __metadata:
     eslint: "npm:8.10.0"
     eslint-config-next: "npm:15.0.3"
     lodash: "npm:^4.17.21"
+    lucide-react: "npm:^0.554.0"
     next: "npm:^15.3.1"
     pg: "npm:^8.11.3"
     postcss: "npm:^8.4.8"
