@@ -2,7 +2,17 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { Gauge, Fuel, Cog, Car, GaugeCircle, Disc3, BatteryCharging, ChevronLeft, ChevronRight } from "lucide-react"
+import {
+  Gauge,
+  Fuel,
+  Cog,
+  Car,
+  GaugeCircle,
+  Disc3,
+  BatteryCharging,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react"
 
 type VehicleFeature = {
   label: string
@@ -24,7 +34,7 @@ const vehicles: VehicleCard[] = [
     id: "audi-s4",
     title: "Audi S4 2020",
     subtitle: "18 360 km • Manuelle • Essence • Noir",
-    image: "/images/trending/audi-s4.jpg",
+    image: "/images/trending/audi-1.jpg",
     price: "49 950 €",
     status: "Sale",
     features: [
@@ -40,7 +50,7 @@ const vehicles: VehicleCard[] = [
     id: "tesla-model-3",
     title: "Tesla Model 3",
     subtitle: "975 km • Automatique • Électrique • Gris",
-    image: "/images/trending/tesla-model-3.jpg",
+    image: "/images/trending/tesla-1.jpg",
     price: "42 800 €",
     features: [
       { label: "975 km", icon: <Gauge size={22} /> },
@@ -55,7 +65,24 @@ const vehicles: VehicleCard[] = [
     id: "jeep-grand-cherokee",
     title: "Jeep Grand Cherokee 2021",
     subtitle: "1 500 km • Automatique • Diesel • Blanc",
-    image: "/images/trending/jeep-grand-cherokee.jpg",
+    image: "/images/trending/jeep-1.jpg",
+    price: "35 460 €",
+    status: "Nouveau",
+    features: [
+      { label: "1 500 km", icon: <Gauge size={22} /> },
+      { label: "Automatique", icon: <Cog size={22} /> },
+      { label: "4x4", icon: <Car size={22} /> },
+      { label: "Diesel", icon: <Fuel size={22} /> },
+      { label: "V6 3.6L", icon: <GaugeCircle size={22} /> },
+      { label: "Freins Disque", icon: <Disc3 size={22} /> },
+    ],
+  },
+
+  {
+    id: "jeep-grand-rest",
+    title: "Jeep Grand Cherokee 2021",
+    subtitle: "1 500 km • Automatique • Diesel • Blanc",
+    image: "/images/trending/audi-1.jpg",
     price: "35 460 €",
     status: "Nouveau",
     features: [
@@ -71,7 +98,11 @@ const vehicles: VehicleCard[] = [
 
 const TrendingVehicles = () => {
   const [itemsPerView, setItemsPerView] = useState(3)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(vehicles.length) // Commencer au début des originaux
+  const [isTransitioning, setIsTransitioning] = useState(true)
+
+  // Dupliquer les véhicules pour créer l'effet infini
+  const duplicatedVehicles = [...vehicles, ...vehicles, ...vehicles]
 
   useEffect(() => {
     const updateItemsPerView = () => {
@@ -90,18 +121,43 @@ const TrendingVehicles = () => {
     return () => window.removeEventListener("resize", updateItemsPerView)
   }, [])
 
-  const maxIndex = Math.max(0, vehicles.length - itemsPerView)
-
+  // Gérer la boucle infinie
   useEffect(() => {
-    setCurrentIndex((prev) => Math.min(prev, maxIndex))
-  }, [maxIndex])
+    if (isTransitioning) {
+      // Attendre la fin de la transition avant de vérifier
+      const timer = setTimeout(() => {
+        setIsTransitioning(false)
+        if (currentIndex >= vehicles.length * 2) {
+          // Si on est à la fin des copies, sauter au début des originaux sans transition
+          setCurrentIndex(vehicles.length)
+        } else if (currentIndex < vehicles.length) {
+          // Si on est avant les originaux, sauter à la fin des copies sans transition
+          setCurrentIndex(vehicles.length * 2 - 1)
+        }
+      }, 500) // Durée de la transition
+
+      return () => clearTimeout(timer)
+    }
+  }, [currentIndex, isTransitioning])
+
+  // Auto-slide toutes les 3 secondes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true)
+      setCurrentIndex((prev) => prev + 1)
+    }, 3000) // 3 secondes
+
+    return () => clearInterval(interval)
+  }, [])
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1))
+    setIsTransitioning(true)
+    setCurrentIndex((prev) => prev - 1)
   }
 
   const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1))
+    setIsTransitioning(true)
+    setCurrentIndex((prev) => prev + 1)
   }
 
   const cardWidth = 100 / itemsPerView
@@ -117,22 +173,25 @@ const TrendingVehicles = () => {
             <div className="h-1 w-24 bg-red-600 mt-4 rounded-full" />
           </div>
           <p className="text-base sm:text-lg text-gray-500 max-w-xl">
-            Explorez les véhicules actuellement les plus convoités pour leurs performances
-            exceptionnelles et leur design résolument moderne.
+            Explorez les véhicules actuellement les plus convoités pour leurs
+            performances exceptionnelles et leur design résolument moderne.
           </p>
         </div>
 
         <div className="relative">
           <div className="overflow-hidden rounded-[32px]">
             <div
-              className="flex gap-6 transition-transform duration-500 ease-out"
+              className="flex gap-6"
               style={{
                 transform: `translateX(-${currentIndex * cardWidth}%)`,
+                transition: isTransitioning
+                  ? "transform 0.5s ease-out"
+                  : "none",
               }}
             >
-              {vehicles.map((vehicle) => (
+              {duplicatedVehicles.map((vehicle, index) => (
                 <article
-                  key={vehicle.id}
+                  key={`${vehicle.id}-${index}`}
                   className="bg-white rounded-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.08)] border border-gray-100 overflow-hidden"
                   style={{ flex: `0 0 calc(${cardWidth}% - 1rem)` }}
                 >
@@ -153,8 +212,12 @@ const TrendingVehicles = () => {
 
                   <div className="p-6 flex flex-col gap-6">
                     <div>
-                      <h3 className="text-2xl font-semibold text-gray-900">{vehicle.title}</h3>
-                      <p className="text-sm text-gray-500 mt-1">{vehicle.subtitle}</p>
+                      <h3 className="text-2xl font-semibold text-gray-900">
+                        {vehicle.title}
+                      </h3>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {vehicle.subtitle}
+                      </p>
                     </div>
 
                     <div className="grid grid-cols-3 gap-3 text-center">
@@ -171,8 +234,12 @@ const TrendingVehicles = () => {
 
                     <div className="flex items-center justify-between border-t border-gray-100 pt-4">
                       <div>
-                        <span className="text-xs uppercase text-gray-400">Prix</span>
-                        <p className="text-2xl font-bold text-red-600">{vehicle.price}</p>
+                        <span className="text-xs uppercase text-gray-400">
+                          Prix
+                        </span>
+                        <p className="text-2xl font-bold text-red-600">
+                          {vehicle.price}
+                        </p>
                       </div>
                       <button className="text-sm font-semibold text-red-600 hover:text-red-700">
                         Voir détails →
@@ -186,16 +253,14 @@ const TrendingVehicles = () => {
 
           <button
             onClick={handlePrev}
-            disabled={currentIndex === 0}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white border border-gray-200 shadow-lg rounded-full p-3 text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white border border-gray-200 shadow-lg rounded-full p-3 text-gray-700 hover:bg-gray-50 transition-colors z-10"
             aria-label="Précédent"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={handleNext}
-            disabled={currentIndex === maxIndex}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white border border-gray-200 shadow-lg rounded-full p-3 text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white border border-gray-200 shadow-lg rounded-full p-3 text-gray-700 hover:bg-gray-50 transition-colors z-10"
             aria-label="Suivant"
           >
             <ChevronRight className="w-5 h-5" />
@@ -207,4 +272,3 @@ const TrendingVehicles = () => {
 }
 
 export default TrendingVehicles
-

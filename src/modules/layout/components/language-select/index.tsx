@@ -71,6 +71,7 @@ const LanguageSelect = ({ regions }: LanguageSelectProps) => {
         as="span"
         onChange={handleChange}
         value={current}
+        id="language-select-listbox"
       >
         <ListboxButton
           className="flex items-center gap-x-2 hover:text-ui-fg-base"

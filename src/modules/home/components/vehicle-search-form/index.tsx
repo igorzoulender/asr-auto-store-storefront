@@ -136,6 +136,14 @@ const VehicleSearchForm = () => {
     transmissionTypes[0]
   )
 
+  // IDs statiques pour éviter les erreurs d'hydratation
+  const brandSelectId = "vehicle-search-brand"
+  const modelSelectId = "vehicle-search-model"
+  const yearSelectId = "vehicle-search-year"
+  const vehicleTypeSelectId = "vehicle-search-type"
+  const fuelSelectId = "vehicle-search-fuel"
+  const transmissionSelectId = "vehicle-search-transmission"
+
   // Mettre à jour les modèles disponibles quand la marque change
   const availableModels = selectedBrand?.value
     ? getModelsByBrand(selectedBrand.value)
@@ -207,6 +215,7 @@ const VehicleSearchForm = () => {
             Marque
           </label>
           <Select<OptionType>
+            instanceId={brandSelectId}
             options={brands}
             value={selectedBrand}
             onChange={(newValue: OptionType | null) => {
@@ -228,6 +237,7 @@ const VehicleSearchForm = () => {
             Modèle
           </label>
           <Select<MultiOptionType, true>
+            instanceId={modelSelectId}
             options={availableModels}
             value={selectedModels}
             onChange={(newValue: readonly MultiOptionType[]) => setSelectedModels([...newValue])}
@@ -247,6 +257,7 @@ const VehicleSearchForm = () => {
             Année
           </label>
           <Select<OptionType>
+            instanceId={yearSelectId}
             options={years}
             value={selectedYear}
             onChange={(newValue: OptionType | null) => setSelectedYear(newValue)}
@@ -267,6 +278,7 @@ const VehicleSearchForm = () => {
             Type de véhicule
           </label>
           <Select<OptionType>
+            instanceId={vehicleTypeSelectId}
             options={vehicleTypes}
             value={selectedVehicleType}
             onChange={(newValue: OptionType | null) => setSelectedVehicleType(newValue)}
@@ -284,6 +296,7 @@ const VehicleSearchForm = () => {
             Carburant
           </label>
           <Select<OptionType>
+            instanceId={fuelSelectId}
             options={fuelTypes}
             value={selectedFuel}
             onChange={(newValue: OptionType | null) => setSelectedFuel(newValue)}
@@ -301,6 +314,7 @@ const VehicleSearchForm = () => {
             Transmission
           </label>
           <Select<OptionType>
+            instanceId={transmissionSelectId}
             options={transmissionTypes}
             value={selectedTransmission}
             onChange={(newValue: OptionType | null) => setSelectedTransmission(newValue)}
