@@ -42,7 +42,7 @@ const NavLink = ({ href, label, "data-testid": dataTestId }: NavLinkProps) => {
       className={clx(
         "transition-colors duration-200 font-medium text-xl whitespace-nowrap",
         {
-          "text-red-600": isActive,
+          "text-primary-red": isActive,
           "text-gray-800 hover:text-gray-600": !isActive,
         }
       )}

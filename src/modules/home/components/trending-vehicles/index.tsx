@@ -1,6 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import Eye from "@modules/common/icons/eye"
 import Image from "next/image"
 import {
   Gauge,
@@ -163,14 +166,14 @@ const TrendingVehicles = () => {
   const cardWidth = 100 / itemsPerView
 
   return (
-    <section className="bg-[#fbfbfc] py-16 md:py-24">
+    <section className="py-16 md:py-24">
       <div className="content-container">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
               Véhicules Tendance Du Moment
             </h2>
-            <div className="h-1 w-24 bg-red-600 mt-4 rounded-full" />
+            <div className="h-1 w-24 bg-primary-red mt-4 rounded-full" />
           </div>
           <p className="text-base sm:text-lg text-gray-500 max-w-xl">
             Explorez les véhicules actuellement les plus convoités pour leurs
@@ -179,9 +182,9 @@ const TrendingVehicles = () => {
         </div>
 
         <div className="relative">
-          <div className="overflow-hidden rounded-[32px]">
+          <div className="overflow-hidden">
             <div
-              className="flex gap-6"
+              className="flex"
               style={{
                 transform: `translateX(-${currentIndex * cardWidth}%)`,
                 transition: isTransitioning
@@ -192,22 +195,51 @@ const TrendingVehicles = () => {
               {duplicatedVehicles.map((vehicle, index) => (
                 <article
                   key={`${vehicle.id}-${index}`}
-                  className="bg-white rounded-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.08)] border border-gray-100 overflow-hidden"
+                  className="bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] border border-gray-100 overflow-hidden mx-3"
                   style={{ flex: `0 0 calc(${cardWidth}% - 1rem)` }}
                 >
-                  <div className="relative h-56 w-full">
+                  <div className="relative h-80 w-full group overflow-hidden cursor-pointer">
                     <Image
                       src={vehicle.image}
                       alt={vehicle.title}
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+
+                    {/* Badge */}
                     {vehicle.status && (
-                      <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full">
+                      <span className="absolute top-4 left-4 bg-primary-red text-white text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full z-20">
                         {vehicle.status}
                       </span>
                     )}
+
+                    {/* 🔥 Effet de gradient animé qui monte */}
+                    <div
+                      className="
+                      absolute inset-0 
+                      bg-gradient-to-t from-black/70 to-transparent 
+                      translate-y-full 
+                      group-hover:translate-y-0 
+                      transition-transform 
+                      duration-500 
+                      z-10
+                    "
+                    ></div>
+
+                    {/* Texte qui apparaît avec délai */}
+                    <div
+                      className="
+                      absolute inset-0 bg-primary-blue/65  
+                      opacity-0 group-hover:opacity-100 
+                      transition-opacity duration-150 
+                      delay-100 text-center
+                      flex flex-col items-center justify-center 
+                      p-6 text-white z-20
+                    "
+                    >
+                      <h3 className="text-3xl font-bold leading-9">{vehicle.title}</h3>
+                      <p className="text-3xl mt-4">{vehicle.price}</p>
+                    </div>
                   </div>
 
                   <div className="p-6 flex flex-col gap-6">
@@ -215,21 +247,18 @@ const TrendingVehicles = () => {
                       <h3 className="text-2xl font-semibold text-gray-900">
                         {vehicle.title}
                       </h3>
-                      <p className="text-sm text-gray-500 mt-1">
-                        {vehicle.subtitle}
-                      </p>
-                    </div>
 
-                    <div className="grid grid-cols-3 gap-3 text-center">
-                      {vehicle.features.map((feature, index) => (
-                        <div
-                          key={`${vehicle.id}-${index}`}
-                          className="flex flex-col items-center gap-2 border border-gray-100 rounded-xl p-3 text-gray-600 bg-gray-50/30"
-                        >
-                          <span className="text-red-500">{feature.icon}</span>
-                          <p className="text-xs font-medium">{feature.label}</p>
-                        </div>
-                      ))}
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-2">
+                        {vehicle.features.map((feature, index) => (
+                          <p
+                            className="text-sm flex items-center gap-2 text-gray-600"
+                            key={`${vehicle.id}-${index}`}
+                          >
+                            <span className="font-bold text-primary-blue">{feature.icon}</span>
+                            <span className="font-bold">{feature.label}</span>
+                          </p>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between border-t border-gray-100 pt-4">
@@ -237,11 +266,11 @@ const TrendingVehicles = () => {
                         <span className="text-xs uppercase text-gray-400">
                           Prix
                         </span>
-                        <p className="text-2xl font-bold text-red-600">
+                        <p className="text-2xl font-bold text-primary-red">
                           {vehicle.price}
                         </p>
                       </div>
-                      <button className="text-sm font-semibold text-red-600 hover:text-red-700">
+                      <button className="text-sm font-semibold text-primary-red hover:text-primary-red/80">
                         Voir détails →
                       </button>
                     </div>
@@ -265,6 +294,16 @@ const TrendingVehicles = () => {
           >
             <ChevronRight className="w-5 h-5" />
           </button>
+        </div>
+
+        <div className="flex justify-center mt-10">
+          <LocalizedClientLink
+            href={`/catalogue`}
+            className="bg-primary-blue text-white px-8 py-4 text-lg font-semibold hover:bg-primary-red transition-colors shadow-lg"
+          >
+            <Eye size={20} className="inline-block mr-2" />
+            Consulter le catalogue
+          </LocalizedClientLink>
         </div>
       </div>
     </section>

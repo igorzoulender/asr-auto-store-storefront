@@ -248,7 +248,7 @@ const Hero = () => {
                         <LocalizedClientLink href={content.primaryButton.href}>
                           <Button
                             size="large"
-                            className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105"
+                            className="bg-primary-red hover:bg-primary-red/90 text-white px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105"
                           >
                             {content.primaryButton.text}
                           </Button>

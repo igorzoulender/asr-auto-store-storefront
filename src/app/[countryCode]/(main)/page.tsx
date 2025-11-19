@@ -4,14 +4,19 @@ import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
-import HowItWorks from "@modules/home/components/how-It-works"
 import PopularBrands from "@modules/home/components/popular-brands"
 import TrendingVehicles from "@modules/home/components/trending-vehicles"
+import HowItWorks from "@modules/home/components/how-It-works"
+import WhyChooseUs from "@modules/home/components/why-choose-us"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "ASR-AUTO - Accueil",
+  icons: {
+    icon: "/favicon.ico",
+  },
   description:
-    "A performant frontend ecommerce starter template with Next.js 15 and Medusa.",
+    "Achetez votre voiture en toute sérénité avec ASR-AUTO. Inspection 150 points, garantie, livraison suivie. BMW, Mercedes, Toyota disponibles.",
+  
 }
 
 export default async function Home(props: {
@@ -41,7 +46,11 @@ export default async function Home(props: {
         {/* Popular Brands */}
         <PopularBrands />
 
+        {/* Trending Vehicles */}
         <TrendingVehicles />
+
+        {/* Why Choose Us */}
+        <WhyChooseUs />
 
         {/* <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />

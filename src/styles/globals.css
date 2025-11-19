@@ -3,11 +3,89 @@
 @import "tailwindcss/utilities";
 
 @layer base {
+  * {
+    @apply antialiased;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply antialiased;
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "zero" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-bold;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+    font-weight: 600;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl;
+    font-weight: 600;
+  }
+
+  h6 {
+    @apply text-base md:text-lg;
+    font-weight: 600;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
+    margin-bottom: 1em;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  strong,
+  b {
+    @apply font-semibold;
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+
+  small {
+    @apply text-sm;
   }
 }
 
@@ -128,56 +206,78 @@
     @apply px-4 py-2 border border-black rounded-full hover:bg-black hover:text-white transition-colors duration-200 ease-in;
   }
 
+  /* Typography Scale - Improved */
   .text-xsmall-regular {
-    @apply text-[10px] leading-4 font-normal;
+    @apply text-xs leading-5 font-normal tracking-wide;
+  }
+
+  .text-xsmall-semi {
+    @apply text-xs leading-5 font-semibold tracking-wide;
   }
 
   .text-small-regular {
-    @apply text-xs leading-5 font-normal;
-  }
-
-  .text-small-semi {
-    @apply text-xs leading-5 font-semibold;
-  }
-
-  .text-base-regular {
     @apply text-sm leading-6 font-normal;
   }
 
-  .text-base-semi {
+  .text-small-semi {
     @apply text-sm leading-6 font-semibold;
   }
 
+  .text-base-regular {
+    @apply text-base leading-7 font-normal;
+  }
+
+  .text-base-semi {
+    @apply text-base leading-7 font-semibold;
+  }
+
   .text-large-regular {
-    @apply text-base leading-6 font-normal;
+    @apply text-lg leading-7 font-normal;
   }
 
   .text-large-semi {
-    @apply text-base leading-6 font-semibold;
+    @apply text-lg leading-7 font-semibold;
   }
 
   .text-xl-regular {
-    @apply text-2xl leading-[36px] font-normal;
+    @apply text-xl leading-8 font-normal tracking-tight;
   }
 
   .text-xl-semi {
-    @apply text-2xl leading-[36px] font-semibold;
+    @apply text-xl leading-8 font-semibold tracking-tight;
   }
 
   .text-2xl-regular {
-    @apply text-[30px] leading-[48px] font-normal;
+    @apply text-2xl leading-9 font-normal tracking-tight;
   }
 
   .text-2xl-semi {
-    @apply text-[30px] leading-[48px] font-semibold;
+    @apply text-2xl leading-9 font-semibold tracking-tight;
   }
 
   .text-3xl-regular {
-    @apply text-[32px] leading-[44px] font-normal;
+    @apply text-3xl leading-tight font-normal tracking-tight;
   }
 
   .text-3xl-semi {
-    @apply text-[32px] leading-[44px] font-semibold;
+    @apply text-3xl leading-tight font-semibold tracking-tight;
+  }
+
+  /* Display Typography */
+  .text-display-sm {
+    @apply font-display text-3xl md:text-4xl font-bold leading-tight tracking-tight;
+  }
+
+  .text-display-md {
+    @apply font-display text-4xl md:text-5xl font-bold leading-tight tracking-tight;
+  }
+
+  .text-display-lg {
+    @apply font-display text-5xl md:text-6xl font-bold leading-tight tracking-tighter;
+  }
+
+  .text-display-xl {
+    @apply font-display text-6xl md:text-7xl font-bold leading-none tracking-tighter;
   }
 
   /* React Select Styles */
@@ -190,7 +290,7 @@
   }
 
   .react-select__control--is-focused {
-    @apply border-red-600 ring-2 ring-red-500;
+    @apply border-primary-red ring-2 ring-primary-red;
   }
 
   .react-select__menu {
@@ -202,22 +302,22 @@
   }
 
   .react-select__option--is-selected {
-    @apply bg-red-600 text-white;
+    @apply bg-primary-red text-white;
   }
 
   .react-select__option--is-focused {
-    @apply bg-red-50;
+    @apply bg-primary-red/10;
   }
 
   .react-select__multi-value {
-    @apply bg-red-100 rounded;
+    @apply bg-primary-red/20 rounded;
   }
 
   .react-select__multi-value__label {
-    @apply text-red-800;
+    @apply text-primary-red;
   }
 
   .react-select__multi-value__remove {
-    @apply hover:bg-red-200 text-red-800;
+    @apply hover:bg-primary-red/30 text-primary-red;
   }
 }

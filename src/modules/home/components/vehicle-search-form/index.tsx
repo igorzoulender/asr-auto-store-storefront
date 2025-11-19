@@ -331,7 +331,7 @@ const VehicleSearchForm = () => {
       <div className="flex lg:justify-end md:justify-end sm:justify-center justify-center">
         <Button
           type="submit"
-          className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-base font-semibold transition-all duration-300 flex items-center gap-2 border-2 border-red-500 shadow-[0_4px_0_rgba(0,0,0,0.08)]"
+          className="bg-primary-red hover:bg-primary-red/90 text-white px-8 py-3 text-base font-semibold transition-all duration-300 flex items-center gap-2 border-2 border-primary-red shadow-[0_4px_0_rgba(0,0,0,0.08)]"
         >
           <Search size={20} color="white" />
           <span className="uppercase">Rechercher</span>

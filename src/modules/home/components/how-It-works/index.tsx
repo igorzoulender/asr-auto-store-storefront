@@ -34,7 +34,7 @@ const HowItWorks = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
-            Comment ça <span className="text-red-600">marche</span> ?
+            Comment ça <span className="text-primary-blue">marche</span> ?
           </h2>
           <p className="mt-4 text-base sm:text-lg text-gray-500">
             Un processus simple et transparent en 4 étapes pour vous garantir une expérience
@@ -46,7 +46,7 @@ const HowItWorks = () => {
         <div className="relative mt-14">
           {/* Connection Line - Desktop */}
           <div
-            className="hidden lg:block absolute inset-x-16 top-1/2 h-[3px] bg-gradient-to-r from-red-500 via-rose-400 to-orange-300"
+            className="hidden lg:block absolute inset-x-16 top-1/2 h-[3px] bg-gradient-to-r from-primary-blue via-[#5ba3d4] to-[#7abce6]"
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
@@ -58,13 +58,18 @@ const HowItWorks = () => {
               >
                 <div className="flex items-center justify-between mb-6">
                   {/* Step Number */}
-                  <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-[18px] bg-red-600 text-white font-bold text-2xl flex items-center justify-center shadow-[0_12px_24px_rgba(220,38,38,0.35)]">
+                  <div
+                    className="w-16 h-16 sm:w-18 sm:h-18 rounded-[18px] text-white font-bold text-2xl flex items-center justify-center bg-primary-blue"
+                    style={{
+                      boxShadow: "0 12px 24px rgba(60, 139, 194, 0.35)",
+                    }}
+                  >
                     {step.number}
                   </div>
 
                   {/* Icon */}
                   <div className="w-14 h-14 rounded-2xl bg-[#f3f4f6] flex items-center justify-center border border-white shadow-inner">
-                    <step.icon className="w-6 h-6 text-red-600" />
+                    <step.icon className="w-6 h-6 text-primary-blue" />
                   </div>
                 </div>
 

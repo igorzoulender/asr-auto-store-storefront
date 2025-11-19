@@ -98,7 +98,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                               className={clx(
                                 "text-3xl leading-10 transition-colors duration-200",
                                 {
-                                  "text-red-600": isActive,
+                                  "text-primary-red": isActive,
                                   "text-white hover:text-gray-300": !isActive,
                                 }
                               )}
