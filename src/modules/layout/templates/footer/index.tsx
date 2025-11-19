@@ -76,14 +76,15 @@ export default async function Footer() {
               <Image
                 src="/images/asr-auto-logo.png"
                 alt="ASR Auto Logo"
-                width={120}
-                height={40}
-                className="h-10 w-auto"
+                width={140}
+                height={50}
+                className="h-12 w-auto brightness-0 invert"
               />
             </LocalizedClientLink>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Votre partenaire de confiance pour l'achat et la vente de véhicules d'occasion.
-              Plus de 30 ans d'expérience au service de l'automobile.
+            <p className="text-base text-gray-300 leading-relaxed">
+              Votre partenaire de confiance pour l'achat de voitures en toute
+              transparence. Inspection rigoureuse, garantie écrite, livraison
+              suivie.
             </p>
             {/* Social Media */}
             <div className="flex gap-3 mt-2">
@@ -107,13 +108,15 @@ export default async function Footer() {
 
           {/* Quick Links */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-base font-semibold text-white">Liens Rapides</h3>
+            <h3 className="text-lg font-semibold text-white">
+              Liens Rapides
+            </h3>
             <ul className="flex flex-col gap-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <LocalizedClientLink
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                    className="text-base text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </LocalizedClientLink>
@@ -124,14 +127,17 @@ export default async function Footer() {
 
           {/* Categories & Collections */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-base font-semibold text-white">Navigation</h3>
+            <h3 className="text-lg font-semibold text-white">Navigation</h3>
             <div className="flex flex-col gap-4">
               {productCategories && productCategories?.length > 0 && (
                 <div>
-                  <span className="text-sm font-medium text-gray-300 mb-2 block">
+                  <span className="text-base font-medium text-gray-300 mb-2 block">
                     Catégories
                   </span>
-                  <ul className="flex flex-col gap-2" data-testid="footer-categories">
+                  <ul
+                    className="flex flex-col gap-2"
+                    data-testid="footer-categories"
+                  >
                     {productCategories?.slice(0, 5).map((c) => {
                       if (c.parent_category) {
                         return null
@@ -139,7 +145,7 @@ export default async function Footer() {
                       return (
                         <li key={c.id}>
                           <LocalizedClientLink
-                            className="text-sm text-gray-400 hover:text-white transition-colors"
+                            className="text-base text-gray-300 hover:text-white transition-colors"
                             href={`/categories/${c.handle}`}
                             data-testid="category-link"
                           >
@@ -153,14 +159,14 @@ export default async function Footer() {
               )}
               {collections && collections.length > 0 && (
                 <div>
-                  <span className="text-sm font-medium text-gray-300 mb-2 block">
+                  <span className="text-base font-medium text-gray-300 mb-2 block">
                     Collections
                   </span>
                   <ul className="flex flex-col gap-2">
                     {collections?.slice(0, 5).map((c) => (
                       <li key={c.id}>
                         <LocalizedClientLink
-                          className="text-sm text-gray-400 hover:text-white transition-colors"
+                          className="text-base text-gray-300 hover:text-white transition-colors"
                           href={`/collections/${c.handle}`}
                         >
                           {c.title}
@@ -175,8 +181,10 @@ export default async function Footer() {
 
           {/* Contact & Legal */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-base font-semibold text-white">Contact & Informations</h3>
-            <div className="flex flex-col gap-3 text-sm text-gray-400">
+            <h3 className="text-lg font-semibold text-white">
+              Contact & Informations
+            </h3>
+            <div className="flex flex-col gap-3 text-base text-gray-300">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary-blue flex-shrink-0 mt-0.5" />
                 <p>
@@ -202,22 +210,28 @@ export default async function Footer() {
             </div>
 
             <div className="mt-4 pt-4 border-t border-gray-800">
-              <h4 className="text-sm font-medium text-gray-300 mb-3">Informations Légales</h4>
+              <h4 className="text-base font-medium text-gray-300 mb-3">
+                Informations Légales
+              </h4>
               <ul className="flex flex-col gap-2">
                 {legalLinks.map((link) => (
                   <li key={link.href}>
                     <LocalizedClientLink
                       href={link.href}
-                      className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                      className="text-base text-gray-300 hover:text-white transition-colors flex items-center gap-2"
                     >
                       {link.label === "Conditions Générales de Vente" && (
                         <FileText className="h-4 w-4" />
                       )}
-                      {link.label === "Mentions Légales" && <Info className="h-4 w-4" />}
+                      {link.label === "Mentions Légales" && (
+                        <Info className="h-4 w-4" />
+                      )}
                       {link.label === "Politique de Confidentialité" && (
                         <Shield className="h-4 w-4" />
                       )}
-                      {link.label === "FAQ" && <HelpCircle className="h-4 w-4" />}
+                      {link.label === "FAQ" && (
+                        <HelpCircle className="h-4 w-4" />
+                      )}
                       <span>{link.label}</span>
                     </LocalizedClientLink>
                   </li>
@@ -230,10 +244,10 @@ export default async function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Text className="text-sm text-gray-400">
+            <Text className="text-base text-gray-300">
               © {currentYear} ASR Auto. Tous droits réservés.
             </Text>
-            <div className="flex items-center gap-6 text-sm text-gray-400">
+            <div className="flex items-center gap-6 text-base text-gray-300">
               <LocalizedClientLink
                 href="/legal"
                 className="hover:text-white transition-colors"
