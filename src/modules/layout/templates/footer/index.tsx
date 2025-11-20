@@ -78,7 +78,7 @@ export default async function Footer() {
                 alt="ASR Auto Logo"
                 width={140}
                 height={50}
-                className="h-12 w-auto brightness-0 invert"
+                className="h-12 w-auto invert"
               />
             </LocalizedClientLink>
             <p className="text-base text-gray-300 leading-relaxed">

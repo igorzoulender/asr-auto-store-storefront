@@ -7,6 +7,8 @@ import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
 import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
+import Banner from "@modules/common/components/banner"
+import BannerBreadcrumbs from "@modules/common/components/banner-breadcrumbs"
 import { notFound } from "next/navigation"
 import { HttpTypes } from "@medusajs/types"
 
@@ -31,6 +33,23 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
+      {/* Banner with Breadcrumbs */}
+      <div className="relative">
+        <Banner
+          title={product.title}
+          // subtitle={product.description ? product.description.substring(0, 100) + (product.description.length > 100 ? "..." : "") : undefined}
+          data-testid="product-banner"
+        />
+        <BannerBreadcrumbs
+          items={[
+            { label: "Accueil", href: "/" },
+            { label: "Acheter", href: "/store" },
+            { label: product.title },
+          ]}
+          data-testid="product-breadcrumbs"
+        />
+      </div>
+
       <div
         className="content-container  flex flex-col small:flex-row small:items-start py-6 relative"
         data-testid="product-container"
