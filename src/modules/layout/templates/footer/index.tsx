@@ -69,7 +69,7 @@ export default async function Footer() {
     <footer className="border-t border-ui-border-base w-full bg-gray-900 text-white">
       <div className="content-container flex flex-col w-full">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 py-12 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-8 lg:py-10">
           {/* Company Info */}
           <div className="flex flex-col gap-4">
             <LocalizedClientLink href="/" className="flex items-center gap-2">
@@ -111,12 +111,12 @@ export default async function Footer() {
             <h3 className="text-lg font-semibold text-white">
               Liens Rapides
             </h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <LocalizedClientLink
                     href={link.href}
-                    className="text-base text-gray-300 hover:text-white transition-colors"
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </LocalizedClientLink>
@@ -131,7 +131,7 @@ export default async function Footer() {
             <div className="flex flex-col gap-4">
               {productCategories && productCategories?.length > 0 && (
                 <div>
-                  <span className="text-base font-medium text-gray-300 mb-2 block">
+                  <span className="text-sm font-medium text-gray-300 mb-2 block">
                     Catégories
                   </span>
                   <ul
@@ -145,7 +145,7 @@ export default async function Footer() {
                       return (
                         <li key={c.id}>
                           <LocalizedClientLink
-                            className="text-base text-gray-300 hover:text-white transition-colors"
+                            className="text-sm text-gray-300 hover:text-white transition-colors"
                             href={`/categories/${c.handle}`}
                             data-testid="category-link"
                           >
@@ -159,14 +159,14 @@ export default async function Footer() {
               )}
               {collections && collections.length > 0 && (
                 <div>
-                  <span className="text-base font-medium text-gray-300 mb-2 block">
+                  <span className="text-sm font-medium text-gray-300 mb-2 block">
                     Collections
                   </span>
                   <ul className="flex flex-col gap-2">
                     {collections?.slice(0, 5).map((c) => (
                       <li key={c.id}>
                         <LocalizedClientLink
-                          className="text-base text-gray-300 hover:text-white transition-colors"
+                          className="text-sm text-gray-300 hover:text-white transition-colors"
                           href={`/collections/${c.handle}`}
                         >
                           {c.title}
@@ -184,7 +184,7 @@ export default async function Footer() {
             <h3 className="text-lg font-semibold text-white">
               Contact & Informations
             </h3>
-            <div className="flex flex-col gap-3 text-base text-gray-300">
+            <div className="flex flex-col gap-2 text-sm text-gray-300">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary-blue flex-shrink-0 mt-0.5" />
                 <p>
@@ -209,45 +209,50 @@ export default async function Footer() {
               </a>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-gray-800">
-              <h4 className="text-base font-medium text-gray-300 mb-3">
-                Informations Légales
-              </h4>
-              <ul className="flex flex-col gap-2">
-                {legalLinks.map((link) => (
-                  <li key={link.href}>
-                    <LocalizedClientLink
-                      href={link.href}
-                      className="text-base text-gray-300 hover:text-white transition-colors flex items-center gap-2"
-                    >
-                      {link.label === "Conditions Générales de Vente" && (
-                        <FileText className="h-4 w-4" />
-                      )}
-                      {link.label === "Mentions Légales" && (
-                        <Info className="h-4 w-4" />
-                      )}
-                      {link.label === "Politique de Confidentialité" && (
-                        <Shield className="h-4 w-4" />
-                      )}
-                      {link.label === "FAQ" && (
-                        <HelpCircle className="h-4 w-4" />
-                      )}
-                      <span>{link.label}</span>
-                    </LocalizedClientLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
+
           </div>
+        </div>
+
+
+
+        {/* Legal Information - Horizontal */}
+        <div className="border-t border-gray-800 py-6">
+          <h4 className="text-sm font-medium text-gray-300 mb-4">
+            Informations Légales
+          </h4>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {legalLinks.map((link) => (
+              <li key={link.href}>
+                <LocalizedClientLink
+                  href={link.href}
+                  className="text-sm text-gray-300 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  {link.label === "Conditions Générales de Vente" && (
+                    <FileText className="h-4 w-4" />
+                  )}
+                  {link.label === "Mentions Légales" && (
+                    <Info className="h-4 w-4" />
+                  )}
+                  {link.label === "Politique de Confidentialité" && (
+                    <Shield className="h-4 w-4" />
+                  )}
+                  {link.label === "FAQ" && (
+                    <HelpCircle className="h-4 w-4" />
+                  )}
+                  <span>{link.label}</span>
+                </LocalizedClientLink>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Text className="text-base text-gray-300">
+            <Text className="text-sm text-gray-300">
               © {currentYear} ASR Auto. Tous droits réservés.
             </Text>
-            <div className="flex items-center gap-6 text-base text-gray-300">
+            <div className="flex items-center gap-6 text-sm text-gray-300">
               <LocalizedClientLink
                 href="/legal"
                 className="hover:text-white transition-colors"

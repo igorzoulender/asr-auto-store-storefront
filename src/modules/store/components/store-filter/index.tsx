@@ -118,12 +118,18 @@ const createSelectStyles = <T, IsMulti extends boolean>(): StylesConfig<T, IsMul
       color: "white",
     },
   }),
+  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
 })
 
 const singleSelectStyles = createSelectStyles<OptionType, false>()
 const multiSelectStyles = createSelectStyles<MultiOptionType, true>()
 
-const StoreFilter = () => {
+type StoreFilterProps = {
+  className?: string
+  hideTitle?: boolean
+}
+
+const StoreFilter = ({ className, hideTitle }: StoreFilterProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const params = useParams()
@@ -237,6 +243,17 @@ const StoreFilter = () => {
     router.push(`/${countryCode}/store?${params.toString()}`)
   }
 
+  const resetFilters = () => {
+    setSelectedBrand(brands[0])
+    setSelectedModels([])
+    setSelectedYear(years[0])
+    setSelectedVehicleType(vehicleTypes[0])
+    setSelectedFuel(fuelTypes[0])
+    setSelectedTransmission(transmissionTypes[0])
+
+    router.push(`/${countryCode}/store`)
+  }
+
   // Format option pour afficher le logo
   const formatOptionLabel = ({ label, logo }: OptionType) => (
     <div className="flex items-center gap-1">
@@ -254,8 +271,18 @@ const StoreFilter = () => {
   )
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
-      <h3 className="text-xl font-bold text-gray-900 mb-6">Filtres</h3>
+    <div className={className || "bg-white rounded-lg shadow-md p-6 border border-gray-200 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto"}>
+      {!hideTitle && (
+        <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+          <h3 className="text-xl font-bold text-gray-900">Filtres</h3>
+          <button 
+            onClick={resetFilters}
+            className="text-primary-red hover:text-primary-red text-sm font-medium"
+          >
+            Effacer tout
+          </button>
+        </div>
+      )}
       
       <div className="space-y-4">
         {/* Marque */}
@@ -278,6 +305,7 @@ const StoreFilter = () => {
             placeholder="Toutes les marques"
             className="react-select-container"
             classNamePrefix="react-select"
+            menuPortalTarget={typeof document !== "undefined" ? document.body : null}
           />
         </div>
 
@@ -302,6 +330,7 @@ const StoreFilter = () => {
             className="react-select-container"
             classNamePrefix="react-select"
             isDisabled={!selectedBrand || selectedBrand.value === "all" || availableModels.length === 0}
+            menuPortalTarget={typeof document !== "undefined" ? document.body : null}
           />
         </div>
 
@@ -323,6 +352,7 @@ const StoreFilter = () => {
             placeholder="Toutes les années"
             className="react-select-container"
             classNamePrefix="react-select"
+            menuPortalTarget={typeof document !== "undefined" ? document.body : null}
           />
         </div>
 
@@ -344,6 +374,7 @@ const StoreFilter = () => {
             placeholder="Tous les types"
             className="react-select-container"
             classNamePrefix="react-select"
+            menuPortalTarget={typeof document !== "undefined" ? document.body : null}
           />
         </div>
 
@@ -365,6 +396,7 @@ const StoreFilter = () => {
             placeholder="Tous les carburants"
             className="react-select-container"
             classNamePrefix="react-select"
+            menuPortalTarget={typeof document !== "undefined" ? document.body : null}
           />
         </div>
 
@@ -386,6 +418,7 @@ const StoreFilter = () => {
             placeholder="Toutes les transmissions"
             className="react-select-container"
             classNamePrefix="react-select"
+            menuPortalTarget={typeof document !== "undefined" ? document.body : null}
           />
         </div>
       </div>
